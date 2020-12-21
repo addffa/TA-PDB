@@ -1,0 +1,17 @@
+CREATE KEYSPACE student_keyspace
+WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : '2'}
+AND durable_writes = 'true';
+
+USE student_keyspace;
+
+CREATE TABLE student_by_department (department text, id int, name text, PRIMARY KEY(department, id));
+
+INSERT INTO student_by_department (department, id, name) VALUES ('ilkom', 1, 'Budi');
+INSERT INTO student_by_department (department, id, name) VALUES ('si', 2, 'Ani');
+INSERT INTO student_by_department (department, id, name) VALUES ('si', 3, 'Dodi');
+
+SELECT * FROM student_by_department;
+
+UPDATE student_by_department SET name='Bahagia' WHERE department='ilkom' AND id=1;
+
+DELETE FROM student_by_department WHERE department='si' AND id=3;
